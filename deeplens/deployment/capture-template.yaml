@@ -1,0 +1,43 @@
+AWSTemplateFormatVersion: 2010-09-09
+
+Transform: AWS::Serverless-2016-10-31
+Description: Deploys the Lambda function to capture pictures into S3
+
+Resources:
+  # This bucket hosts the pictures captured by the AWS DeepLens
+  SageMakerFingerPics:
+    Type: AWS::S3::Bucket
+
+  DeepLensCapture:
+    Type: AWS::Serverless::Function
+    Properties:
+      Description: This function takes pictures from the AWS DeepLens and stores them in the referenced bucket in JPG format
+      Handler: capture.function_handler
+      Runtime: python2.7
+      CodeUri: ../src/capture
+      MemorySize: 256
+      Timeout: 5
+      Role: !Join ['', ['arn:aws:iam::', !Ref 'AWS::AccountId', ':role/service-role/AWSDeepLensLambdaRole']]
+      AutoPublishAlias: prod
+      Environment:
+        Variables:
+          BUCKET_NAME: !Ref SageMakerFingerPics
+  
+  GreenGrassGroupRolePolicy:
+    Type: AWS::IAM::ManagedPolicy
+    Properties:
+        Description: This policy allows the DeepLens Greengrass group to write on the bucket created and publish on a topic for results
+        ManagedPolicyName: WriteToFingersBucket
+        PolicyDocument:
+          {
+            "Version": "2012-10-17",
+            "Statement": [
+              {
+                "Effect": "Allow",
+                "Action": "s3:PutObject",
+                "Resource": !Join ["/", [!GetAtt SageMakerFingerPics.Arn, "*"]]
+              }
+            ]
+          }
+        Roles: 
+          - AWSDeepLensGreengrassGroupRole

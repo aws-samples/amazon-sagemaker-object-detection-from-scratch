@@ -1,0 +1,17 @@
+AWSTemplateFormatVersion: 2010-09-09
+
+Transform: AWS::Serverless-2016-10-31
+Description: Deploys the Lambda function to run inferences at the edge
+
+Resources:
+  DeepLensInfer:
+    Type: AWS::Serverless::Function
+    Properties:
+      Description: This function takes pictures from the AWS DeepLens and detects fingers by running an ML model
+      Handler: inference.function_handler
+      Runtime: python2.7
+      CodeUri: ../src/inference
+      MemorySize: 256
+      Timeout: 5
+      Role: !Join ['', ['arn:aws:iam::', !Ref 'AWS::AccountId', ':role/service-role/AWSDeepLensLambdaRole']]
+      AutoPublishAlias: prod
