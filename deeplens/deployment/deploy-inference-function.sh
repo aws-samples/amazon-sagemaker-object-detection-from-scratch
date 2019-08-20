@@ -31,9 +31,9 @@ else
     # Package the Lambda function
     if sam build -t capture-template.yaml; then
         # Transform the SAM template to an AWS CloudFormation template
-        if sam package --region us-east-1 --template-file ./inference-template.yaml --s3-bucket "${BUCKETNAME}" --output-template-file packaged-template.yaml; then
+        if sam package --template-file ./inference-template.yaml --s3-bucket "${BUCKETNAME}" --output-template-file packaged-template.yaml; then
             # Deploy the CloudFormation template
-            sam deploy --region us-east-1 --template-file ./packaged-template.yaml --stack-name "${STACKNAME}" --capabilities CAPABILITY_NAMED_IAM;
+            sam deploy --template-file ./packaged-template.yaml --stack-name "${STACKNAME}" --capabilities CAPABILITY_NAMED_IAM;
 
             # Remove the intermediate template
             rm ./packaged-template.yaml;
