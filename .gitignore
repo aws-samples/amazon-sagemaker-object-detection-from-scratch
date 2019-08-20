@@ -1,0 +1,40 @@
+# AWS SAM
+.aws-sam/
+
+# Doc (temporarily)
+doc/
+
+# Eclipse
+.classpath
+.project
+.settings/
+
+# Intellij
+.idea/
+*.iml
+*.iws
+
+# Maven
+log/
+target/
+
+# VIM
+*.swp
+
+# Mac
+.DS_Store
+.DS_Store?
+
+# VS Code
+.vscode/
+
+# Windows
+Desktop.ini
+*.lnk
+*.cab
+*.msi
+*.msm
+*.msp
+$RECYCLE.BIN/
+Thumbs.db
+ehthumbs.db
