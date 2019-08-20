@@ -98,7 +98,7 @@ You also need the certificate of the root CA in the Greengrass group of your Dee
 
 ### Run the trigger application
 
-1. Go to the **trigger/src** directory and run ```python trigger_app.py```
+1. Go to the **trigger** directory and run ```python src/trigger_app.py```
 2. The application will open a new window that may be hidden, so switch applications (alt+tab) and you'll see a Python application.
 3. Once in that window, click *'y'* to save a picture, *'q'* to quit the application, or any other key to ignore the current picture and request a new one.
 
