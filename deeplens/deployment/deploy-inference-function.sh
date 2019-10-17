@@ -29,9 +29,9 @@ if [ -z "$BUCKETNAME" -o -z "$STACKNAME" ]; then
     echo ${HELP}
 else
     # Package the Lambda function
-    if sam build -t capture-template.yaml; then
+    if sam build -t inference-template.yaml; then
         # Transform the SAM template to an AWS CloudFormation template
-        if sam package --template-file ./inference-template.yaml --s3-bucket "${BUCKETNAME}" --output-template-file packaged-template.yaml; then
+        if sam package --s3-bucket "${BUCKETNAME}" --output-template-file packaged-template.yaml; then
             # Deploy the CloudFormation template
             sam deploy --template-file ./packaged-template.yaml --stack-name "${STACKNAME}" --capabilities CAPABILITY_NAMED_IAM;
 
