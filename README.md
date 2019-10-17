@@ -33,6 +33,7 @@ This repository contains the code used during the namesake webinar broadcasted a
 |       |   └── requirements.txt            # Dependencies for the picture capturing function
 │       └── inference
 |           └── inference.py                # Source code for the inference function
+|           └── requirements.txt            # Dependencies for the inference function
 ├── notebook
 │   └── finger_counting.ipynb               # Jupyter notebook to train and deploy the object detection model
 └── trigger                                 # Contains the resources for the application that triggers the picture capture and validation
