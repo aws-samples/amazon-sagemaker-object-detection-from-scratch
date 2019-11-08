@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 #*****************************************************
 #                                                    *
 # Copyright 2019 Amazon.com, Inc. or its affiliates. *
@@ -117,7 +118,7 @@ def infinite_infer_run():
         client.publish(topic=iot_topic, payload='Object detection model loaded')
         # Set the threshold for detection
         detection_threshold = 0.30
-        
+
         # Do inference until the lambda is killed.
         while True:
             # Get a frame from the video stream
